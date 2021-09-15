@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../asset/bootstrap-5.1.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/css/bautom/index.css">
+</head>
+
+<body>
+    <div class="main container-fluid container-lg">
+        <div class="dashboard">
+            <div class="dashboard-cpt js-cpt-dashboard row g-1">
+                <div class="col-4 position-relative text-center">
+                    <img src="../asset/img/bautom/huou.png" alt="" class="img-fluid unbrightness">
+                    <img src="../asset/img/bautom/dauhoi.png" alt="" class="img-fluid img-temp">
+                </div>
+                <div class="col-4 position-relative text-center">
+                    <img src="../asset/img/bautom/ga.png" alt="" class="img-fluid unbrightness">
+                    <img src="../asset/img/bautom/dauhoi.png" alt="" class="img-fluid img-temp">
+                </div>
+                <div class="col-4 position-relative text-center">
+                    <img src="../asset/img/bautom/ca.png" alt="" class="img-fluid unbrightness">
+                    <img src="../asset/img/bautom/dauhoi.png" alt="" class="img-fluid img-temp">
+                </div>
+            </div>
+            <div class="text-center position-relative">
+                <div class="js-dashboard-nav ">
+                    <button class="btn btn-success text-uppercase js-start-button" disabled>Quất</button>
+                </div>
+                <div class="notify js-notify mt-2 d-none">
+                    <span class="js-notify-text">Tạm thời: </span>
+                    <span class="js-money-decrease-temp text-danger"></span>
+                </div>
+            </div>
+            <div class="dashboard-user js-dashboard-user">
+                <div class="row">
+                    <div class="bet-wrapper text-center col-4">
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                        <img src="../asset/img/bautom/huou.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="0">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                    </div>
+                    <div class="bet-wrapper text-center col-4">
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                        <img src="../asset/img/bautom/bau.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="1">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                    </div>
+                    <div class="bet-wrapper text-center col-4">
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                        <img src="../asset/img/bautom/ga.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="2">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                    </div>
+                    <div class="bet-wrapper text-center col-4">
+                        <img src="../asset/img/bautom/ca.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="3">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                    </div>
+                    <div class="bet-wrapper text-center col-4">
+                        <img src="../asset/img/bautom/cua.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="4">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                    </div>
+                    <div class="bet-wrapper text-center col-4">
+                        <img src="../asset/img/bautom/tom.png" alt="" class="bet-img img-fluid">
+                        <div class="js-bet-step-container unbet" value="5">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger bet-button js-bet-button">Đặt cược</button>
+                        </div>
+                        <span style="font-size:12px" class="d-block">Đã ra: <span class="text-danger fw-bold js-count-result"></span> lần</span>
+                        <span style="font-size:12px" class="d-block">Đã đặt: <span class="text-danger fw-bold js-count-bet"></span> lần</span>
+                    </div>
+                </div>
+                <div class="user-nav mt-2">
+                    <span>
+                        <span class="user-money-text d-block">Tiền hiện có</span>
+                        <span class="user-money js-user-money"></span>
+                    </span>
+                    <div class="button-group d-flex">
+                        <button class="btn btn-success d-block me-2 d-lg-none js-history-button">Xem lịch sử</button>
+                        <a href="../index.html">
+                            <button class="btn btn-danger d-block">Trốn</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="overlay js-history-overlay d-none"></div>
+        <div class="history js-history">
+            <div class="history-head">
+                <h3>Lịch sử (<span class="js-count text-danger">123</span>)</h3>
+                <button class="d-block d-lg-none btn btn-close p-3 position-absolute top-0 end-0 js-history-close-button"></button>
+            </div>
+            <div class="js-history-body">
+                
+            </div>
+        </div>
+    </div>
+
+    <audio class="js-victory-audio" src="../asset/music/chienthang.mp3"></audio>
+    <audio class="js-lose-audio" src="../asset/music/thuacuoc2.mp3"></audio>
+    <audio class="js-main-audio" src="../asset/music/bautom.mp3"></audio>
+
+    
+
+    <script src="../asset/bootstrap-5.1.0-dist/js/bootstrap.min.js"></script>
+    <script src="../asset/js/bautom.js"></script>
+</body>
+
+</html>

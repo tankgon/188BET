@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../asset/bootstrap-5.1.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/css/oantuti/index.css">
+</head>
+
+<body>
+    <div class="main container">
+        <div class="dashboard row">
+            <div class="menu pt-2 pb-2">
+                <div class="menu-cpt">
+                    <div class="cpt-selected-container js-cpt-selected-container">
+                        <img class="img-fluid img-unselect" src="../asset/img/oantuti/keo.png" alt="">
+                        <img class="img-fluid logo-dau-hoi" src="../asset/img/oantuti/dauhoi.png" alt="">
+                    </div>
+                    <div class="nav-cpt nav-select">
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-cpt-hand" src="../asset/img/oantuti/keo.png" alt="">
+                            <span style="font-size: 12px; transform: rotate(180deg);"><span class="text-danger js-count-cpt-selected">22</span> lần</span>
+                            <span style="font-size: 12px; transform: rotate(180deg);">Đã ra đòn:</span>
+                        </div>
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-cpt-hand" src="../asset/img/oantuti/bua.png" alt="">
+                            <span style="font-size: 12px; transform: rotate(180deg);"><span class="text-danger js-count-cpt-selected">22</span> lần</span>
+                            <span style="font-size: 12px; transform: rotate(180deg);">Đã ra đòn:</span>
+                        </div>
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-cpt-hand" src="../asset/img/oantuti/bao.png" alt="">
+                            <span style="font-size: 12px; transform: rotate(180deg);"><span class="text-danger js-count-cpt-selected">22</span> lần</span>
+                            <span style="font-size: 12px; transform: rotate(180deg);">Đã ra đòn:</span>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="user-nav">
+                        <span>
+                            <span class="user-money-text d-block">Tiền hiện có</span>
+                            <span class="user-money js-user-money">1000000</span>
+                        </span>
+                        <div class="button-group d-flex">
+                            <button class="btn btn-success d-block me-2 d-md-none js-history-button">Xem lịch sử</button>
+                            <a href="../index.html">
+                                <button class="btn btn-danger d-block">Trốn</button>
+                            </a>
+                        </div>
+                    </div>
+
+                <div class="menu-user">
+                    <div class="user-selected-container js-user-selected-container unselect">
+                        <img class="img-fluid img-unselect" src="../asset/img/oantuti/keo.png" alt="">
+                        <img class="img-fluid logo-dau-hoi" src="../asset/img/oantuti/dauhoi.png" alt="">
+                    </div>
+                    <div class="nav-user nav-select">
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-user-hand" src="../asset/img/oantuti/keo.png" alt="">
+                            <span style="font-size: 12px;">Đã ra đòn:</span>
+                            <span style="font-size: 12px;"><span class="text-danger js-count-user-selected">0</span> lần</span>
+                        </div>
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-user-hand" src="../asset/img/oantuti/bua.png" alt="">
+                            <span style="font-size: 12px;">Đã ra đòn:</span>
+                            <span style="font-size: 12px;"><span class="text-danger js-count-user-selected">0</span> lần</span>
+                        </div>
+                        <div class="d-flex flex-column text-center">
+                            <img class="img-fluid ps-sm-5 pe-sm-5 js-user-hand" src="../asset/img/oantuti/bao.png" alt="">
+                            <span style="font-size: 12px;">Đã ra đòn:</span>
+                            <span style="font-size: 12px;"><span class="text-danger js-count-user-selected">0</span> lần</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-bet js-menu-bet text-center">
+                <h5 class="bet-title">Đặt cược</h5>
+                <div class="bet-input-wrapper position-relative">
+                    <input type="number" class="bet-input js-bet-input">
+                    <ul class="bet-fast-list">
+                        <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                        <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                        <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn btn-success m-auto mt-2 js-bet-confirm-button">Xác nhận</button>
+                    <button class="btn btn-danger m-auto mt-2 js-allin-button">All in</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay js-history-overlay d-none"></div>
+        <div class="history js-history">
+            <div class="history-head">
+                <h3>Lịch sử (<span class="js-count text-danger"></span>) </h3>
+            </div>
+            <div class="history-body">
+            </div>
+        </div>
+    </div>
+
+    <audio class="js-victory-audio" src="../asset/music/chienthang.mp3"></audio>
+    <audio class="js-lose-audio" src="../asset/music/thuacuoc.mp3"></audio>
+
+    <script src="../asset/bootstrap-5.1.0-dist/js/bootstrap.min.js"></script>
+    <script src="../asset/js/oantuti.js"></script>
+</body>
+
+</html>

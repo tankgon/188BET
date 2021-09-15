@@ -1,0 +1,29 @@
+/* ------------- Reponsive ------------------ */
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px){
+    .history{
+        transform: translateX(100%);
+    }
+
+    .dashboard{
+        margin-right: 0;
+    }
+
+    .menu{
+        .nav-select{
+            justify-content: space-around !important;
+            img{
+                height: 60px;
+            }
+        }
+    }
+}
+
+@media (max-width: 575px){
+    
+}
+

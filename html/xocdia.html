@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../asset/bootstrap-5.1.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/css/xocdia/index.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="dashboard">
+            <div class="container-lg">
+                <h3 class="background-title">Chiếc chiếu quỷ ám</h3>
+                <div class="text-center position-relative js-result-container">
+                    <img class="img-fluid result-un-start" src="../asset/img/xocdia/chuamo.png" alt="">
+                    <button class="btn btn-danger d-block m-auto text-uppercase js-start-button start-button" disabled>mở bát</button>
+                </div>
+    
+                <div class="row bet-nav-container js-bet-nav-container ">
+                    <div class="col-4 text-center bet-container">
+                        <div>
+                            <span class="count-result">Đã về : <span class="fs-l text-danger js-count-result">120</span> lần</span>
+                            <img class="bet-img img-fluid" src="../asset/img/xocdia/chan.png" alt="">
+                        </div>
+                        <div class="js-bet-wrapper unbet" style="transform: translateY(50%)" data-value="0">
+                            <div class="bet-input-wrapper position-relative">
+                            <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <button class="btn btn-success btn-sm mt-2 text-uppercase js-bet-button">bet</button>
+                                <button class="btn btn-danger btn-sm mt-2 text-uppercase js-allin-button">all in</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notify js-notify-container col-4 mt-4">
+                        
+                    </div>
+                    <div class="col-4 text-center bet-container">
+                        <div>
+                            <span class="count-result">Đã về : <span class="fs-l text-danger js-count-result">120</span> lần</span>
+                            <img class="bet-img img-fluid" src="../asset/img/xocdia/le.png" alt="">
+                        </div>
+                        <div class="js-bet-wrapper unbet" style="transform: translateY(50%)" data-value="1">
+                            <div class="bet-input-wrapper position-relative">
+                                <input type="number" class="bet-input js-bet-input">
+                                <ul class="bet-fast-list">
+                                    <li data-value="1000000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+1000000</li>
+                                    <li data-value="500000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+500000</li>
+                                    <li data-value="100000" class="bet-fast-button js-bet-fast-button text-danger fw-bold">+100000</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <button class="btn btn-success btn-sm mt-2 text-uppercase js-bet-button">bet</button>
+                                <button class="btn btn-danger btn-sm mt-2 text-uppercase js-allin-button">all in</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row g-1 g-lg-4 js-sub-history">
+
+                </div>
+                <div class="user-nav mt-2">
+                    <span>
+                        <span class="user-money-text d-block fw-bold">Tiền hiện có</span>
+                        <span class="user-money js-user-money"></span>
+                    </span>
+                    <div class="button-group d-flex">
+                        <button class="btn btn-success d-block me-2 js-history-button">Xem lịch sử</button>
+                        <a href="../index.html">
+                            <button class="btn btn-danger d-block">Trốn</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="overlay js-history-overlay d-none"></div>
+        <div class="history js-history">
+            <div class="history-head">
+                <h3>Lịch sử</h3>
+                <button class="btn btn-close p-3 position-absolute top-0 end-0 js-history-close-button"></button>
+            </div>
+            <div class="js-history-body p-2">
+                
+            </div>
+        </div>
+    </div>
+    <audio class="js-main-audio" src="../asset/music/dapbat.mp3"></audio>
+    <audio class="js-lose-audio" src="../asset/music/thuacuoc2.mp3"></audio>
+    <audio class="js-victory-audio" src="../asset/music/chienthang.mp3"></audio>
+    
+
+    <script src="../asset/bootstrap-5.1.0-dist/js/bootstrap.min.js"></script>
+    <script src="../asset/js/xocdia.js"></script>
+
+</body>
+
+</html>

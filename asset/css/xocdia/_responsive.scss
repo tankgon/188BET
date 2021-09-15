@@ -1,0 +1,28 @@
+/* ------------- Reponsive ------------------ */
+
+@media (max-width: 991px) {
+    
+}
+
+@media (max-width: 767px){
+    
+}
+
+@media (max-width: 575px){
+    .bet-img{
+        width: 60px;
+    }
+
+    .bet-input{
+        width: 100%;
+    }
+
+    .result-img{
+        transform: unset;
+    }
+
+    .result-un-start{
+        transform: scale(0.7);
+    }
+}
+
