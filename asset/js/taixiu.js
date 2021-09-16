@@ -259,7 +259,7 @@ const app = {
         notifyContainer.innerHTML = app.notifyComponent2(check !== -1, moneyIncome);
 
         const date = new Date();
-        arrHistory.unshift({ 
+        arrHistory.unshift({
             time: convertDate(date).time,
             date: convertDate(date).date,
             bet: [...app.bet],
@@ -335,7 +335,7 @@ const app = {
     },
 
     renderCountResult: function() {
-        _$$('.js-count-result').forEach((i, index) => {
+        [..._$$('.js-count-result')].reverse().forEach((i, index) => {
             i.innerHTML = arrCountResult[index];
         })
     },
