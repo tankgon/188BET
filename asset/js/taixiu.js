@@ -2,7 +2,7 @@
 
 function createStorage(key) {
     const storage = JSON.parse(localStorage.getItem(key)) ?? {};
-    function save() {
+    const save = () => {
         localStorage.setItem(key, JSON.stringify(storage));
     }
     
@@ -50,29 +50,30 @@ const mainAudio = _$('.js-main-audio');
 const loseAudio = _$('.js-lose-audio');
 const victoryAudio = _$('.js-victory-audio');
 
-let arrHistory = taixiuStorage.get('history') || [];
-let arrCountResult = taixiuStorage.get('countResult') || new Array(2).fill(0);
-let myMoney = moneyStorage.get('value') || 999999;
-myMoneyElem.innerHTML = myMoney;
-
 const app = {
 
-    bet: [],
-    totalBetMoney: 0,
-    result: 0,
-    betImg: [
-        '../asset/img/taixiu/xiu.png',
-        '../asset/img/taixiu/tai.png',
-    ],
-    resultImg2: [
-        '../asset/img/taixiu/win.png',
-        '../asset/img/taixiu/lose.png',
-        '../asset/img/taixiu/hoa.png',
-    ],
+    init: function () {
+        this.arrHistory = taixiuStorage.get('history') || [];
+        this.arrCountResult = taixiuStorage.get('countResult') || new Array(2).fill(0);
+        this.myMoney = moneyStorage.get('value') || 999999;
+        this.bet = [];
+        this.totalBetMoney = 0;
+        this.result = null;
+        this.betImg = [
+            '../asset/img/taixiu/xiu.png',
+            '../asset/img/taixiu/tai.png',
+        ];
+        this.resultImg2 = [
+            '../asset/img/taixiu/win.png',
+            '../asset/img/taixiu/lose.png',
+            '../asset/img/taixiu/hoa.png',
+        ]
+        this.renderMoney();
+    },
 
     handleEvent: function() {
 
-        betNavContainer.addEventListener('click', function(e) {
+        betNavContainer.addEventListener('click', (e) => {
             const _this = e.target;
             const isBetButton = _this.closest('.js-bet-button');
             const isReturnButton = _this.closest('.js-return-button');
@@ -91,25 +92,25 @@ const app = {
                     alert('Chưa đặt cược kìa bạn ey!');
                     return;
                 }
-                else if (money > myMoney) {
+                else if (money > this.myMoney) {
                     alert('Tiền ít đòi hít lol thơm à bạn ey!');
-                    betInput.value = myMoney;
+                    betInput.value = this.myMoney;
                     return;
                 }
 
 
                 _$('.js-start-button').disabled = false;
-                myMoney -= money;
-                myMoneyElem.innerHTML = myMoney;
+                this.myMoney -= money;
+                myMoneyElem.innerHTML = this.myMoney;
 
-                const pos = app.bet.findIndex(i => i.value === value)
+                const pos = this.bet.findIndex(i => i.value === value)
                 pos !== -1
-                ? app.bet[pos] = { value, money } 
-                : app.bet.push({ value, money });
+                ? this.bet[pos] = { value, money } 
+                : this.bet.push({ value, money });
                 
-                app.totalBetMoney = -app.bet.reduce((a, b) => a + b.money, 0);
-                notifyContainer.innerHTML = app.notifyComponent1(app.totalBetMoney);
-                container.innerHTML = app.betStep2Component(money);
+                this.totalBetMoney = -this.bet.reduce((a, b) => a + b.money, 0);
+                notifyContainer.innerHTML = this.notifyComponent1(this.totalBetMoney);
+                container.innerHTML = this.betStep2Component(money);
                 container.classList.remove('unbet');
             }
 
@@ -117,24 +118,24 @@ const app = {
             else if (isReturnButton) {
                 const container = _this.parentNode;
                 const value = +container.dataset.value
-                const pos = app.bet.findIndex(i => i.value === value);
-                const money = app.bet[pos].money;
+                const pos = this.bet.findIndex(i => i.value === value);
+                const money = this.bet[pos].money;
 
-                app.bet.splice(pos, 1);
-                app.totalBetMoney += money;
-                myMoney += money;
-                myMoneyElem.innerHTML = myMoney;
+                this.bet.splice(pos, 1);
+                this.totalBetMoney += money;
+                this.myMoney += money;
+                myMoneyElem.innerHTML = this.myMoney;
 
-                container.innerHTML = app.betStep1Component(money);
+                container.innerHTML = this.betStep1Component(money);
                 container.classList.add('unbet');
-                notifyContainer.innerHTML = app.notifyComponent1(app.totalBetMoney);
+                notifyContainer.innerHTML = this.notifyComponent1(this.totalBetMoney);
             }
 
             //xử lí all in
             else if (isAllinButton) {
                 const container = _this.parentNode.parentNode;
                 const betInput = container.querySelector('.js-bet-input');
-                betInput.value = myMoney;
+                betInput.value = this.myMoney;
             }
 
             //xử lí đặt nhanh
@@ -147,20 +148,20 @@ const app = {
             }
         })
 
-        notifyContainer.addEventListener("click", function(e) {
+        notifyContainer.addEventListener("click", (e) => {
             const _this = e.target;
             const isContinueButton = _this.closest('.js-continue-button');
 
             //xử lí tiếp tục chơi
             if (isContinueButton) {
                 notifyContainer.innerHTML = '';
-                app.bet.length = 0;
-                app.totalBetMoney = 0;
-                app.result = 0;
+                this.bet.length = 0;
+                this.totalBetMoney = 0;
+                this.result = null;
                 startButton.classList.remove('d-none');
                 startButton.disabled = true;
                 _$$('.js-bet-wrapper').forEach(container => {
-                    container.innerHTML = app.betStep1Component();
+                    container.innerHTML = this.betStep1Component();
                     container.classList.add('unbet');
                 })
             }
@@ -168,15 +169,15 @@ const app = {
 
          //xử lí bắt đầu
          const dices = _$$('.dice');
-         startButton.addEventListener("click", function() {
+         startButton.addEventListener("click", (e) => {
              
-            if (app.totalBetMoney === 0){
+            if (this.totalBetMoney === 0){
                 alert('Chưa đặt cược kìa bạn ey!');
             return;
             }
 
-            app.result = 0;
-            this.classList.add('d-none');
+            this.result = 0;
+            e.target.classList.add('d-none');
             _$$('.js-return-button').forEach(i => { i.remove() });
                 if ( _$('.js-bet-wrapper.unbet')) {
                     _$('.js-bet-wrapper.unbet').innerHTML = '';
@@ -185,7 +186,7 @@ const app = {
 
             dices.forEach((dice, index) => {
                 let result = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-                app.result += result;
+                this.result += result;
                 dice.dataset.side = result;
                 dice.classList.toggle("reRoll");
                 dice.animate([
@@ -203,10 +204,10 @@ const app = {
                 })
             })
 
-            app.save();
+            this.save();
             
             setTimeout(() => {
-                app.handleResult();
+                this.handleResult();
             },1500)
          });
  
@@ -222,17 +223,17 @@ const app = {
         const history = _$('.js-history');
         const closeButton = _$('.js-history-close-button');
         const overlay = _$('.js-history-overlay');
-        _$('.js-history-button').addEventListener('click', function() {
+        _$('.js-history-button').addEventListener('click', () => {
             history.classList.add('is-open');
             overlay.classList.toggle('d-none');
         })
 
-        closeButton.addEventListener('click', function() {
+        closeButton.addEventListener('click', () => {
             overlay.classList.toggle('d-none');
             history.classList.remove('is-open');
         })
 
-        overlay.addEventListener('click', function() {
+        overlay.addEventListener('click', () => {
             overlay.classList.toggle('d-none');
             history.classList.remove('is-open');
         })
@@ -240,14 +241,14 @@ const app = {
 
     //xử lí kết thúc
     handleResult: function() {
-        let result = app.result > 10 ? 1 : 0;
-        let moneyIncome = app.totalBetMoney;
-        let check = app.bet.findIndex(i => i.value === result);
+        let result = this.result > 10 ? 1 : 0;
+        let moneyIncome = this.totalBetMoney;
+        let check = this.bet.findIndex(i => i.value === result);
         
         if (check !== -1) {
-            moneyIncome = moneyIncome + Math.abs(app.bet[check].money) * 2;
-            myMoney = myMoney + Math.abs(app.bet[check].money) * 2;
-            myMoneyElem.innerHTML = myMoney;
+            moneyIncome = moneyIncome + Math.abs(this.bet[check].money) * 2;
+            this.myMoney = this.myMoney + Math.abs(this.bet[check].money) * 2;
+            myMoneyElem.innerHTML = this.myMoney;
         }
 
         if (moneyIncome > 0) {
@@ -256,32 +257,36 @@ const app = {
             loseAudio.play();
         }
 
-        notifyContainer.innerHTML = app.notifyComponent2(check !== -1, moneyIncome);
+        notifyContainer.innerHTML = this.notifyComponent2(check !== -1, moneyIncome);
 
         const date = new Date();
-        arrHistory.unshift({
+        this.arrHistory.unshift({
             time: convertDate(date).time,
             date: convertDate(date).date,
-            bet: [...app.bet],
+            bet: [...this.bet],
             moneyIncome: moneyIncome,
             result: result,
         })
 
-        if (arrHistory.length > 10) arrHistory.length = 10;
-        arrCountResult[result]++;
+        if (this.arrHistory.length > 10) this.arrHistory.length = 10;
+        this.arrCountResult[result]++;
 
-        app.render();
-        app.save();
+        this.render();
+        this.save();
+    },
+
+    renderMoney: function() {
+        myMoneyElem.innerHTML = this.myMoney;
     },
 
     renderHistory: function() {
         const historyContainer = _$('.js-history-body');
-        const html = arrHistory.map((i, index) => {
+        const html = this.arrHistory.map((i, index) => {
 
             let result, moneyText;
             const betImage = i.bet.map(j => {
                 return `
-                    <img class="img-fluid rounded-circle" src="${app.betImg[j.value]}" alt="">
+                    <img class="img-fluid rounded-circle" src="${this.betImg[j.value]}" alt="">
                 `;
             }).join('')
 
@@ -305,14 +310,14 @@ const app = {
 
                     <div class="p-2 col-4">
                         <span class="d-block" style="font-size: 12px;">#1</span>
-                        <img class="img-fluid" src="${app.resultImg2[result]}" alt="">
+                        <img class="img-fluid" src="${this.resultImg2[result]}" alt="">
                         ${moneyText}
                         <span class="d-block" style="font-size: 12px;">${i.time}</span>
                         <span class="d-block" style="font-size: 12px;">${i.date}</span>
                     </div>
 
                     <div class="p-2 col-4">
-                        <img class="img-fluid rounded-circle" src="${app.betImg[i.result]}" alt="">
+                        <img class="img-fluid rounded-circle" src="${this.betImg[i.result]}" alt="">
                         <span>Kết quả</span>
                     </div>
                 </div>
@@ -323,11 +328,11 @@ const app = {
 
     renderSubHistory: function() {
         const container = _$('.js-sub-history');
-        const html = arrHistory.map((i, index) => {
+        const html = this.arrHistory.map((i, index) => {
             return `
                 <div class="text-center col-1">
                     <span class="fw-bold fs-xs">#<span class="text-danger fs-s">${index + 1}</span></span> 
-                    <img class="img-fluid rounded-circle" src="${app.betImg[i.result]}" alt="">
+                    <img class="img-fluid rounded-circle" src="${this.betImg[i.result]}" alt="">
                 </div>
             `;
         }).join('');
@@ -336,7 +341,7 @@ const app = {
 
     renderCountResult: function() {
         [..._$$('.js-count-result')].reverse().forEach((i, index) => {
-            i.innerHTML = arrCountResult[index];
+            i.innerHTML = this.arrCountResult[index];
         })
     },
 
@@ -372,22 +377,22 @@ const app = {
         `
     },
     notifyComponent2: function(result, moneyIncome) {
-        const result2 = app.result > 10 ? 1 : 0;
+        const result2 = this.result > 10 ? 1 : 0;
         if (!result) {
             return `
                 <div>
-                    <span class="badge mb-2 ${result2 === 1 ? 'bg-danger' : 'bg-dark'}">${app.result} Điểm</span>
+                    <span class="badge mb-2 ${result2 === 1 ? 'bg-danger' : 'bg-dark'}">${this.result} Điểm</span>
                 </div>
-                <img class="img-fluid rounded-circle" src="${app.betImg[result2]}" alt="">
+                <img class="img-fluid rounded-circle" src="${this.betImg[result2]}" alt="">
                 <h3 class="text-danger mt-2">${moneyIncome}</h3>
                 <button class="js-continue-button btn btn-sm btn-success d-block m-auto text-uppercase">Còn thở còn gỡ</button>
             `
         } else{
             return `
                 <div>
-                    <span class="badge mb-2 ${result2 === 1 ? 'bg-danger' : 'bg-dark'}">${app.result} Điểm</span>
+                    <span class="badge mb-2 ${result2 === 1 ? 'bg-danger' : 'bg-dark'}">${this.result} Điểm</span>
                 </div>
-                <img class="img-fluid rounded-circle" src="${app.betImg[result2]}" alt="">
+                <img class="img-fluid rounded-circle" src="${this.betImg[result2]}" alt="">
                 <h3 class="text-success mt-2">+${moneyIncome}</h3>
                 <button class="js-continue-button btn btn-sm btn-success d-block m-auto text-uppercase">Tiếp tục ăn không</button>
             `
@@ -396,20 +401,21 @@ const app = {
     },
 
     save: function() {
-        moneyStorage.set('value', myMoney);
-        taixiuStorage.set('history', arrHistory);
-        taixiuStorage.set('countResult', arrCountResult);
+        moneyStorage.set('value', this.myMoney);
+        taixiuStorage.set('history', this.arrHistory);
+        taixiuStorage.set('countResult', this.arrCountResult);
     },
 
     render: function() {
-        app.renderHistory();
-        app.renderSubHistory();
-        app.renderCountResult();
+        this.renderHistory();
+        this.renderSubHistory();
+        this.renderCountResult();
     },
 
     start: function() {
-        app.render();
-        app.handleEvent();
+        this.init();
+        this.render();
+        this.handleEvent();
     },
 }
 

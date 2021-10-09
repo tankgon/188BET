@@ -2,7 +2,7 @@
 
 function createStorage(key) {
     const storage = JSON.parse(localStorage.getItem(key)) ?? {};
-    function save() {
+    const save = () => {
         localStorage.setItem(key, JSON.stringify(storage));
     }
     
@@ -49,32 +49,31 @@ const userHandSelected = _$('.js-user-hand-selected');
 const loseAudio = _$('.js-lose-audio');
 const victoryAudio = _$('.js-victory-audio');
 
-const arrHistory = oantutiStorage.get('history') ?? [];
-const arrCountCptHand = oantutiStorage.get('cptHand') ?? new Array(3).fill(0);
-const arrCountUserHand = oantutiStorage.get('userHand') ?? new Array(3).fill(0);
-
-let myMoney = moneyStorage.get('value') || 999999;
-userMoneyElem.innerHTML = myMoney;
-
 const app = {
 
-    betMoney: 0,
-    hands: [
-        '../asset/img/oantuti/keo.png',
-        '../asset/img/oantuti/bua.png',
-        '../asset/img/oantuti/bao.png',
-    ],
-    resultImage: [
-        '../asset/img/oantuti/win.png',
-        '../asset/img/oantuti/lose.png',
-        '../asset/img/oantuti/hoa.png',
-    ],
-    userHandSelected: null,
-    cptHandSelected: null,
+    init: function() {
+        this.arrHistory = oantutiStorage.get('history') ?? [];
+        this.arrCountCptHand = oantutiStorage.get('cptHand') ?? new Array(3).fill(0);
+        this.arrCountUserHand = oantutiStorage.get('userHand') ?? new Array(3).fill(0);
+        this.myMoney = moneyStorage.get('value') || 999999;
+        this.betMoney = 0;
+        this.userHandSelected = null;
+        this.hands = [
+            '../asset/img/oantuti/keo.png',
+            '../asset/img/oantuti/bua.png',
+            '../asset/img/oantuti/bao.png',
+        ];
+        this.resultImage = [
+            '../asset/img/oantuti/win.png',
+            '../asset/img/oantuti/lose.png',
+            '../asset/img/oantuti/hoa.png',
+        ];
+        this.renderMoney();
+    },
 
     handleEvent: function() {
 
-        menuBet.addEventListener('click', function(e) {
+        menuBet.addEventListener('click', (e) => {
             const _this = e.target;
             const isBackButton = _this.closest('.js-bet-return-button');
             const isBetButton = _this.closest('.js-bet-confirm-button');
@@ -95,46 +94,46 @@ const app = {
                 } else if (!isSelected) {
                     alert('Chưa chọn tay kìa bạn ey!');
                     return;
-                } else if(value > myMoney){
+                } else if(value > this.myMoney){
                     alert('Tiền ít đòi hít lol thơm à bạn ey!');
-                    betInput.value = myMoney;
+                    betInput.value = this.myMoney;
                     return;
                 }
-                app.betMoney = value;
-                myMoney -= value;
-                menuBet.innerHTML = app.menuBetStep2Component(value);
-                userMoneyElem.innerHTML = myMoney;
+                this.betMoney = value;
+                this.myMoney -= value;
+                menuBet.innerHTML = this.menuBetStep2Component(value);
+                this.renderMoney();
             }
 
             //xử lí đặt lại
             else if (isBackButton) {
-                myMoney += app.betMoney;
-                userMoneyElem.innerHTML = myMoney;
-                menuBet.innerHTML = app.menuBetStep1Component(app.betMoney);
+                this.myMoney += this.betMoney;
+                this.renderMoney();
+                menuBet.innerHTML = this.menuBetStep1Component(this.betMoney);
             }
             
             //xử lí bắt đầu
             else if (isStartButton) {
                 const random = Math.floor(Math.random() * 3);
-                const cptHandSelectedImg = app.hands[random];
+                const cptHandSelectedImg = this.hands[random];
 
-                app.cptHandSelected = random;
-                cptHandSelectedContainer.innerHTML = app.handSelectedComponent(cptHandSelectedImg);
-                app.xuLiKetThuc();
+                this.cptHandSelected = random;
+                cptHandSelectedContainer.innerHTML = this.handSelectedComponent(cptHandSelectedImg);
+                this.xuLiKetThuc();
             } 
             
             //xử lí tiếp tục chơi
             else if (isContinueButton) {
-                menuBet.innerHTML = app.menuBetStep1Component();
+                menuBet.innerHTML = this.menuBetStep1Component();
                 userHandSelectedContainer.classList.remove('selected');
-                userHandSelectedContainer.innerHTML = app.handUnSelectedComponent();
-                cptHandSelectedContainer.innerHTML = app.handUnSelectedComponent();
+                userHandSelectedContainer.innerHTML = this.handUnSelectedComponent();
+                cptHandSelectedContainer.innerHTML = this.handUnSelectedComponent();
             }
 
             //xử lí all in
             else if (isAllinButton) {
                 const betInput= _$('.js-bet-input')
-                betInput.value = myMoney;
+                betInput.value = this.myMoney;
             }
 
             //xử lí đặt nhanh
@@ -149,23 +148,23 @@ const app = {
         //xử lí chọn tay
         const userHands = _$$('.js-user-hand');
         userHands.forEach((hand, index) => {
-            hand.addEventListener('click', function() {
-                const src = this.src;
-                app.userHandSelected = index;
+            hand.addEventListener('click', (e) => {
+                const src = e.target.src;
+                this.userHandSelected = index;
                 userHandSelectedContainer.classList.add('selected');
-                userHandSelectedContainer.innerHTML = app.handSelectedComponent(src);
+                userHandSelectedContainer.innerHTML = this.handSelectedComponent(src);
             })
         })
 
         //show history mobile
         const history = _$('.js-history');
         const overlay = _$('.js-history-overlay');
-        _$('.js-history-button').addEventListener('click', function() {
+        _$('.js-history-button').addEventListener('click', () => {
             history.classList.add('is-open');
             overlay.classList.toggle('d-none');
         })
 
-        overlay.addEventListener('click', function() {
+        overlay.addEventListener('click', () => {
             overlay.classList.toggle('d-none');
             history.classList.remove('is-open');
         })
@@ -176,9 +175,9 @@ const app = {
         const now = new Date();
         const time = convertDate(now).time;
         const date = convertDate(now).date;
-        const userHand = app.userHandSelected;
-        const cptHand = app.cptHandSelected;
-        const money = app.betMoney;
+        const userHand = this.userHandSelected;
+        const cptHand = this.cptHandSelected;
+        const money = this.betMoney;
 
         if (userHand === cptHand) {
             result = 2;
@@ -202,44 +201,48 @@ const app = {
         }
 
         if (result === 0) {
-            app.betMoney *= 2;
-            myMoney += app.betMoney;
-            userMoneyElem.innerHTML = myMoney;
+            this.betMoney *= 2;
+            this.myMoney += this.betMoney;
+            this.renderMoney();
             victoryAudio.play();
         } 
         else if (result === 1) {
             loseAudio.play();
         } 
         else if (result === 2) {
-            myMoney += app.betMoney;
-            userMoneyElem.innerHTML = myMoney;
+            this.myMoney += this.betMoney;
+            this.renderMoney();
         }
 
-        menuBet.innerHTML = app.menuBetStep3Component(result, app.betMoney);
-        arrHistory.splice(0, 0, { userHand, cptHand, money, result, time, date });
+        menuBet.innerHTML = this.menuBetStep3Component(result, this.betMoney);
+        this.arrHistory.splice(0, 0, { userHand, cptHand, money, result, time, date });
         
-        if (arrHistory.length > 10) arrHistory.length = 10;
+        if (this.arrHistory.length > 10) this.arrHistory.length = 10;
         
-        arrCountUserHand[userHand]++;
-        arrCountCptHand[cptHand]++;
-        app.save();
-        app.render();
+        this.arrCountUserHand[userHand]++;
+        this.arrCountCptHand[cptHand]++;
+        this.save();
+        this.render();
+    },
+
+    renderMoney: function () {
+        userMoneyElem.innerHTML = this.myMoney;
     },
     
     renderCountHand: function() {
         const userHands = _$$('.js-count-user-selected');
         const cptHands = _$$('.js-count-cpt-selected');
-        arrCountUserHand.forEach((i, index) => {
+        this.arrCountUserHand.forEach((i, index) => {
             userHands[index].innerText = i;
         })
-        arrCountCptHand.forEach((i, index) => {
+        this.arrCountCptHand.forEach((i, index) => {
             cptHands[index].innerText = i;
         })
     },
 
     renderHistory: function() {
         const historyContainer = _$('.history-body');
-        _$('.js-count').innerHTML = arrCountCptHand.reduce((a, b) => a + b);
+        _$('.js-count').innerHTML = this.arrCountCptHand.reduce((a, b) => a + b);
         
         function checkResult(result, money) {
             if (result === 0){
@@ -251,24 +254,24 @@ const app = {
             }
         };
 
-        const html = arrHistory.map((i, index) => {
+        const html = this.arrHistory.map((i, index) => {
             return `
                 <div class="history-item">
                     <div class="p-2">
-                        <img class="img-fluid" src="${app.hands[i.userHand]}" alt="">
+                        <img class="img-fluid" src="${this.hands[i.userHand]}" alt="">
                         <span>Bạn</span>
                     </div>
 
                     <div class="p-2">
                         <span class="d-block" style="font-size: 12px;">#${index + 1}</span>
-                        <img class="img-fluid" src="${app.resultImage[i.result]}" alt="">
+                        <img class="img-fluid" src="${this.resultImage[i.result]}" alt="">
                         ${checkResult(i.result, i.money)}
                         <span class="d-block" style="font-size: 12px;">${i.time}</span>
                         <span class="d-block" style="font-size: 12px;">${i.date}</span>
                     </div>
 
                     <div class="p-2">
-                        <img class="img-fluid" src="${app.hands[i.cptHand]}" alt="">
+                        <img class="img-fluid" src="${this.hands[i.cptHand]}" alt="">
                         <span>Máy</span>
                     </div>
                 </div>
@@ -354,20 +357,21 @@ const app = {
     },
 
     save: function() {
-        oantutiStorage.set('history', arrHistory);
-        oantutiStorage.set('userHand', arrCountUserHand);
-        oantutiStorage.set('cptHand', arrCountCptHand);
-        moneyStorage.set('value', myMoney);
+        oantutiStorage.set('history', this.arrHistory);
+        oantutiStorage.set('userHand', this.arrCountUserHand);
+        oantutiStorage.set('cptHand', this.arrCountCptHand);
+        moneyStorage.set('value', this.myMoney);
     },
 
     render: function() {
-        app.renderHistory();
-        app.renderCountHand();
+        this.renderHistory();
+        this.renderCountHand();
     },
 
     start: function() {
-        app.render();
-        app.handleEvent();
+        this.init();
+        this.render();
+        this.handleEvent();
     },
 }
 

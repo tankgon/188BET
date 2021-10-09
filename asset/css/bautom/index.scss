@@ -19,6 +19,10 @@ a{
     background-color: rgba(0,0,0,0.4);
 }
 
+.ws-nowrap{
+    white-space: nowrap;
+}
+
 body{
     height: 100vh;
     overflow-x: hidden;
@@ -68,9 +72,7 @@ body{
 
 .dashboard-user{
     .bet-button{
-        display: block;
-        font-size:12px;
-        margin: 4px auto auto;
+        font-size: 12px;
     }
     .return-button{
         font-size: 12px;
@@ -95,6 +97,7 @@ body{
     .bet-input{
         padding: 2px 8px;
         font-size: 14px;
+        width: 100%;
     }
 
     .bet-fast-list{

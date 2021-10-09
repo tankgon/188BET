@@ -43,7 +43,7 @@ function fix4Number(n) {
 }
 function createStorage(key) {
     const storage = JSON.parse(localStorage.getItem(key)) ?? {};
-    function save() {
+    const save = () => {
         localStorage.setItem(key, JSON.stringify(storage));
     }
     
